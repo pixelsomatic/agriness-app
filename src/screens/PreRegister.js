@@ -7,18 +7,16 @@ import {
   SignArea,
   LoginText,
   LoginLink,
-  RegisterButton,
-  TextButton
 } from "../styles/preRegister";
-import cow from './../../assets/cow.png'
 import { ButtonText, RegularButton } from "../styles/common";
+import pig from './../../assets/pig.png'
 
 export default function PreRegisterScreen() {
   const { navigate } = useNavigation()
 
   return (
     <Container>
-      <Logo source={cow} />
+      <Logo source={pig} />
 
       <RegularButton>
         <ButtonText>Criar sua conta</ButtonText>
