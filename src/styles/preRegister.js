@@ -12,7 +12,7 @@ export const Logo = styled.Image`
 `
 export const SignArea = styled.View`
   flex-direction: row;
-  margin-bottom: 20px;
+  margin-top: 20px;
 `
 export const LoginText = styled.Text`
   font-size: 18px;

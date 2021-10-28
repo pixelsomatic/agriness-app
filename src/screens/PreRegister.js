@@ -20,6 +20,9 @@ export default function PreRegisterScreen() {
     <Container>
       <Logo source={cow} />
 
+      <RegularButton>
+        <ButtonText>Criar sua conta</ButtonText>
+      </RegularButton>
       <SignArea>
         <LoginText>Já possui uma conta? </LoginText>
         <TouchableOpacity onPress={() => {
@@ -28,9 +31,6 @@ export default function PreRegisterScreen() {
           <LoginLink>Entrar</LoginLink>
         </TouchableOpacity>
       </SignArea>
-      <RegularButton>
-        <ButtonText>Criar sua conta</ButtonText>
-      </RegularButton>
     </Container>
   )
 }
