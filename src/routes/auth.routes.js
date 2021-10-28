@@ -16,7 +16,6 @@ const AuthRoutes = () => (
         headerTitleAlign: 'center',
         headerTitleStyle: {
           fontWeight: 'bold',
-          fontFamily: 'Nunito'
         },
         animationTypeForReplace: 'push'
       }}
@@ -26,7 +25,6 @@ const AuthRoutes = () => (
         headerTitleAlign: 'center',
         headerTitleStyle: {
           fontWeight: 'bold',
-          fontFamily: 'Nunito'
         },
         animationTypeForReplace: 'push'
       }}
