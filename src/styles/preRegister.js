@@ -21,11 +21,3 @@ export const LoginText = styled.Text`
 export const LoginLink = styled(LoginText)`
 color: #365e7d;
 `
-export const RegisterButton = styled.TouchableOpacity`
-  background-color: #000;
-  border-radius: 50px;
-  padding: 15px 50px;
-`
-export const TextButton = styled(LoginText)`
-  color: #fff;
-`

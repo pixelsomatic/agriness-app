@@ -11,6 +11,7 @@ import {
   TextButton
 } from "../styles/preRegister";
 import cow from './../../assets/cow.png'
+import { ButtonText, RegularButton } from "../styles/common";
 
 export default function PreRegisterScreen() {
   const { navigate } = useNavigation()
@@ -27,9 +28,9 @@ export default function PreRegisterScreen() {
           <LoginLink>Entrar</LoginLink>
         </TouchableOpacity>
       </SignArea>
-      <RegisterButton>
-        <TextButton>Criar sua conta</TextButton>
-      </RegisterButton>
+      <RegularButton>
+        <ButtonText>Criar sua conta</ButtonText>
+      </RegularButton>
     </Container>
   )
 }
