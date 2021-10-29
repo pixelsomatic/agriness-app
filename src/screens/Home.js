@@ -97,9 +97,11 @@ export default function Home() {
 
           {filteredList.slice(0, beginListing).map((item, index) => (
             <Card key={index}>
-              <TouchableOpacity onPress={() => deleteItem(item.id)}>
-                <Image source={remove} style={{ width: 30, height: 30, alignSelf: 'flex-end' }} />
-              </TouchableOpacity>
+              <View style={{ top: 0, right: 0, alignItems: 'flex-end' }}>
+                <TouchableOpacity style={{ width: 30 }} onPress={() => deleteItem(item.id)}>
+                  <Image source={remove} style={{ width: 30, height: 30, alignSelf: 'flex-end' }} />
+                </TouchableOpacity>
+              </View>
               <Info>
                 <Title>Nome: </Title>
                 <Data>{item.nome}</Data>
