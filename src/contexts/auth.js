@@ -16,9 +16,6 @@ export const AuthProvider = ({ children }) => {
    */
   const [token, setToken] = useState('')
   const [userData, setUserData] = useState({})
-  const [favoriteLocations, setFavoriteLocations] = useState([])
-  const [visitedLocations, setVisitedLocations] = useState([])
-  const [categories, setCategories] = useState([{ name: "Todos", id: "Todos" }])
   const [isError, setIsError] = useState(false)
   const [loading, setLoading] = useState(true)
 
@@ -43,16 +40,16 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   // Realiza o refresh do token
-  useEffect(() => {
-    AsyncStorage.multiGet(['@Agriness:email', '@Agriness:pass']).then((res) => {
-      const user = { email: res[0][1], password: res[1][1] }
+  // useEffect(() => {
+  //   AsyncStorage.multiGet(['@Agriness:email', '@Agriness:pass']).then((res) => {
+  //     const user = { email: res[0][1], password: res[1][1] }
 
-      axios.post(urls.user.login, user).then((res) => {
-        setUserData(res.data.user)
-        setToken(res.data.token)
-      }).catch((err) => console.log('Home/Axios error =>', err))
-    }).catch((err) => console.log('Home/Asynctorage error', err))
-  }, [])
+  //     axios.post(urls.login, user).then((res) => {
+  //       setUserData(res.data.user)
+  //       setToken(res.data.token)
+  //     }).catch((err) => console.log('Home/Axios error =>', err))
+  //   }).catch((err) => console.log('Home/Asynctorage error', err))
+  // }, [])
 
   /**
    * ======
@@ -63,17 +60,9 @@ export const AuthProvider = ({ children }) => {
    */
   async function signIn(email, password) {
     const response = await auth.signIn(email, password)
-
-    if (response.status == 200) {
+    console.log(response, '----');
+    if (response && response.response.status == 200) {
       setUserData(response.data.user)
-      setFavoriteLocations(response.data.user.favorite_locations)
-      setVisitedLocations(response.data.user.checked_in_locations)
-
-      response.data.user.checked_in_locations.map((item) => {
-        if (!categories.includes(item.location.category.name)) {
-          categories.push(item.location.category)
-        }
-      })
       setToken(response.data.token)
 
       const dataUser = [
@@ -101,9 +90,6 @@ export const AuthProvider = ({ children }) => {
       signOut,
       token,
       userData,
-      favoriteLocations,
-      visitedLocations,
-      categories
     }}>
       {children}
     </AuthContext.Provider>
