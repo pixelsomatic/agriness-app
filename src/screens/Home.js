@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, ActivityIndicator, Dimensions, Image, TouchableOpacity, Alert } from "react-native";
 import { useNavigation, StackActions } from "@react-navigation/native";
+import AuthContext from './../contexts/auth'
 
 import axios from "axios";
 import { urls } from './../services/urls'
 
 import remove from './../../assets/remove.png'
+import { LogoutArea, LogoutButtom, LogoutText } from "../styles/app";
 import {
   Card,
   Container,
@@ -21,6 +23,7 @@ import {
 
 export default function Home() {
   const { dispatch } = useNavigation()
+  const { signOut } = useContext(AuthContext)
 
   const [allAnimals, setAllAnimals] = useState([])
   const [filteredList, setFilteredList] = useState([])
@@ -97,6 +100,20 @@ export default function Home() {
         </View>
       ) : (
         <>
+          <LogoutArea>
+            <LogoutButtom onPress={() => {
+              Alert.alert(
+                "Deseja realmente sair ?",
+                "",
+                [
+                  { text: 'Cancelar', onPress: console.log("Cancel Pressed"), style: 'cancel' },
+                  { text: 'Ok', onPress: () => signOut() }
+                ]
+              )
+            }}>
+              <LogoutText>SAIR</LogoutText>
+            </LogoutButtom>
+          </LogoutArea>
           <Filter placeholder={'Pesquise por localização'} autoCapitalize="none" onChangeText={(text) => setStatusFilter(text)} />
 
           {filteredList.slice(0, beginListing).map((item, index) => (
