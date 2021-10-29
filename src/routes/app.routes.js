@@ -27,7 +27,6 @@ const AppRoutes = () => (
         headerTitleStyle: {
           alignSelf: 'center',
           fontWeight: 'bold',
-          fontFamily: 'Nunito'
         }
       }}
       component={AnimalProfile} />

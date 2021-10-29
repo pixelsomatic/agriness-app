@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, ActivityIndicator, Dimensions, Image, TouchableOpacity, Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import axios from "axios";
 import { urls } from './../services/urls'
@@ -19,6 +20,8 @@ import {
 
 
 export default function Home() {
+  const { navigate } = useNavigation()
+
   const [allAnimals, setAllAnimals] = useState([])
   const [filteredList, setFilteredList] = useState([])
   const [beginListing, setBeginListing] = useState(10)
@@ -96,7 +99,11 @@ export default function Home() {
           <Filter placeholder={'Pesquise por localização'} autoCapitalize="none" onChangeText={(text) => setStatusFilter(text)} />
 
           {filteredList.slice(0, beginListing).map((item, index) => (
-            <Card key={index}>
+            <Card key={index} onPress={() => {
+              navigate('Perfil', {
+                info: item
+              })
+            }}>
               <View style={{ top: 0, right: 0, alignItems: 'flex-end' }}>
                 <TouchableOpacity style={{ width: 30 }} onPress={() => deleteItem(item.id)}>
                   <Image source={remove} style={{ width: 30, height: 30, alignSelf: 'flex-end' }} />

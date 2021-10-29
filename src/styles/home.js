@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.ScrollView`
   flex: 1;
 `
-export const Card = styled.View`
+export const Card = styled.Pressable`
   width: 80%;
   padding: 20px;
   background-color: #f9c2ff;
