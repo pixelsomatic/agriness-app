@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, ActivityIndicator, Dimensions, Image, TouchableOpacity, Alert } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, StackActions } from "@react-navigation/native";
 
 import axios from "axios";
 import { urls } from './../services/urls'
@@ -20,13 +20,14 @@ import {
 
 
 export default function Home() {
-  const { navigate } = useNavigation()
+  const { dispatch } = useNavigation()
 
   const [allAnimals, setAllAnimals] = useState([])
   const [filteredList, setFilteredList] = useState([])
   const [beginListing, setBeginListing] = useState(10)
   const [isLoading, setisLoading] = useState(false)
   const [isPaginating, setisPaginating] = useState(false)
+
   const height = Dimensions.get('screen').height
 
   useEffect(() => {
@@ -100,9 +101,8 @@ export default function Home() {
 
           {filteredList.slice(0, beginListing).map((item, index) => (
             <Card key={index} onPress={() => {
-              navigate('Perfil', {
-                info: item
-              })
+              const pushAction = StackActions.push('Perfil', { info: item })
+              dispatch(pushAction)
             }}>
               <View style={{ top: 0, right: 0, alignItems: 'flex-end' }}>
                 <TouchableOpacity style={{ width: 30 }} onPress={() => deleteItem(item.id)}>
