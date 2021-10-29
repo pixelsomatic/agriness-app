@@ -32,3 +32,14 @@ export const TitleButton = styled(Title)`
   color: #fff;
   font-size: 20px;
 `
+export const Filter = styled.TextInput`
+  border-radius: 20px;
+  width: 80%;
+  background-color: #fff;
+  font-size: 18px;
+  height: 50px;
+  border-color: lightgrey;
+  margin: 20px 0;
+  padding-left: 10px;
+  color: rgba(0,0,0,0.5);
+`

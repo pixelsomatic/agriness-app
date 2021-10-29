@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, ActivityIndicator, StyleSheet, StatusBar, Dimensions } from "react-native";
+import { View, ActivityIndicator, Dimensions } from "react-native";
 
 import axios from "axios";
 import { urls } from './../services/urls'
@@ -7,6 +7,7 @@ import {
   Card,
   Container,
   Data,
+  Filter,
   Header,
   Info,
   PaginationButton,
@@ -43,6 +44,19 @@ export default function Home() {
     }, 2000);
   }
 
+  const setStatusFilter = text => {
+    const newList = allAnimals.filter(e => {
+      const location = e.localizacao.toLowerCase()
+      const myText = text.toLowerCase()
+
+      text.length ? setBeginListing(allAnimals.length) : setBeginListing(10)
+
+      return location.indexOf(myText) > -1;
+    })
+
+    setFilteredList(newList)
+  }
+
   return (
     <Container contentContainerStyle={{ alignItems: 'center' }}>
       {isLoading ? (
@@ -51,6 +65,8 @@ export default function Home() {
         </View>
       ) : (
         <>
+          <Filter placeholder={'Pesquise por localização'} autoCapitalize="none" onChangeText={(text) => setStatusFilter(text)} />
+
           {filteredList.slice(0, beginListing).map((item, index) => (
             <Card key={index}>
               <Info>
@@ -63,14 +79,16 @@ export default function Home() {
               </Info>
             </Card>
           ))}
-          {console.log(isPaginating)}
-
           {isPaginating ? (
             <ActivityIndicator color="#000" size="large" />
           ) : (
-            <PaginationButton onPress={() => handlePagination()}>
-              <TitleButton>Ver mais</TitleButton>
-            </PaginationButton>
+            filteredList && filteredList.length ? (
+              <PaginationButton onPress={() => handlePagination()}>
+                <TitleButton>Ver mais</TitleButton>
+              </PaginationButton>
+            ) : (
+              <Title>Não há resultados para essa busca!</Title>
+            )
           )}
         </>
       )}
@@ -79,19 +97,3 @@ export default function Home() {
 
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-  },
-  item: {
-    backgroundColor: '#f9c2ff',
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-  title: {
-    fontSize: 32,
-  },
-});
