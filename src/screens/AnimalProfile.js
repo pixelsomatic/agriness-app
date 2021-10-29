@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Container, Data, Grid, Info, SubTitle, Title, EditArea } from "../styles/animalProfile";
 import { RegularButton, ButtonText } from "../styles/common";
+import { useNavigation } from "@react-navigation/native";
+
 
 export default function AnimalProfile({ route }) {
   const [personalData, setPersonalData] = useState(route.params.info)
+  const { navigate } = useNavigation()
 
   function translate(text) {
     let response = ''
@@ -48,7 +51,11 @@ export default function AnimalProfile({ route }) {
         </Info>
       </Container>
       <EditArea>
-        <RegularButton>
+        <RegularButton onPress={() => {
+          navigate('Editar Perfil de Animal', {
+            details: personalData
+          })
+        }}>
           <ButtonText>Editar</ButtonText>
         </RegularButton>
       </EditArea>

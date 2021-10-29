@@ -31,3 +31,15 @@ export const EditArea = styled.View`
   margin-top: 40px;
   align-items: center;
 `
+export const Input = styled.TextInput`
+  border-radius: 20px;
+  width: 100%;
+  background-color: #fff;
+  font-size: 18px;
+  height: 50px;
+  border-color: lightgrey;
+  margin: 20px 0;
+  padding-left: 10px;
+  background-color: aliceblue;
+  color: rgba(0,0,0,0.5);
+`

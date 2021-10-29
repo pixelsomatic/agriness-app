@@ -30,6 +30,15 @@ const AppRoutes = () => (
         }
       }}
       component={AnimalProfile} />
+    <AppStack.Screen name="Editar Perfil de Animal"
+      options={{
+        headerTitleAlign: 'center',
+        headerTitleStyle: {
+          alignSelf: 'center',
+          fontWeight: 'bold',
+        }
+      }}
+      component={EditAnimalProfile} />
   </AppStack.Navigator>
 );
 
