@@ -42,8 +42,11 @@ const loginValidationSchema = yup.object().shape({
 })
 
 
-export default function LoginScreen() {
+export default function LoginScreen({ route }) {
   const { signIn } = useContext(AuthContext)
+  const [magicEmail, setmagicEmail] = useState(route.params ? route.params.email : '')
+  const [magicPass, setmagicPass] = useState(route.params ? route.params.senha : '')
+
 
   const showToast = (text) => {
     ToastAndroid.showWithGravity(
@@ -65,7 +68,7 @@ export default function LoginScreen() {
     <Container>
       <Formik
         validationSchema={loginValidationSchema}
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ email: magicEmail, password: magicPass }}
         onSubmit={values => {
           handleSign(values)
         }}

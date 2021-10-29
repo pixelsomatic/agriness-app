@@ -18,7 +18,9 @@ export default function PreRegisterScreen() {
     <Container>
       <Logo source={pig} />
 
-      <RegularButton>
+      <RegularButton onPress={() => {
+        navigate('Criar sua conta')
+      }}>
         <ButtonText>Criar sua conta</ButtonText>
       </RegularButton>
       <SignArea>
