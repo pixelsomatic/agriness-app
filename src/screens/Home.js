@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { View, ActivityIndicator, Dimensions } from "react-native";
+import { View, ActivityIndicator, Dimensions, Image, TouchableOpacity, Alert } from "react-native";
 
 import axios from "axios";
 import { urls } from './../services/urls'
+
+import remove from './../../assets/remove.png'
 import {
   Card,
   Container,
@@ -14,6 +16,7 @@ import {
   Title,
   TitleButton,
 } from "../styles/home";
+
 
 export default function Home() {
   const [allAnimals, setAllAnimals] = useState([])
@@ -35,6 +38,31 @@ export default function Home() {
   useEffect(() => {
     setBeginListing(10)
   }, [isLoading])
+
+  async function deleteItem(id) {
+    try {
+      const url = urls.farm + '/' + id
+      const response = await axios.delete(url)
+
+      console.log(response.data)
+      Alert.alert(
+        "Registro deletado!",
+        "",
+        [
+          {
+            text: 'Ok', onPress: () => updateList(id)
+          }
+        ]
+      )
+
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  function updateList(id) {
+    setFilteredList([...allAnimals.filter(e => e.id !== id)])
+  }
 
   function handlePagination() {
     setisPaginating(true)
@@ -69,6 +97,9 @@ export default function Home() {
 
           {filteredList.slice(0, beginListing).map((item, index) => (
             <Card key={index}>
+              <TouchableOpacity onPress={() => deleteItem(item.id)}>
+                <Image source={remove} style={{ width: 30, height: 30, alignSelf: 'flex-end' }} />
+              </TouchableOpacity>
               <Info>
                 <Title>Nome: </Title>
                 <Data>{item.nome}</Data>
