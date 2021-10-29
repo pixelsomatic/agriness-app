@@ -8,14 +8,16 @@ export function signIn(email, pass) {
     method: 'POST',
     url: urls.login,
     headers: { 'Content-Type': 'application/json' },
-    data: { email: email, password: pass }
+    data: user
   };
 
-  axios.request(options).then(function (response) {
+
+  var objResponse = axios.request(options).then(function (response) {
     console.log(response.data);
-    return response.data;
+    return response.data
   }).catch(function (error) {
     console.error(error);
     return error.response?.status;
   });
+  return objResponse;
 }

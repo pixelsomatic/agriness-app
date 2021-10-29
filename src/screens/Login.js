@@ -43,10 +43,7 @@ const loginValidationSchema = yup.object().shape({
 
 
 export default function LoginScreen() {
-  const [email, setEmail] = useState('')
-  const [pass, setPass] = useState('')
   const { signIn } = useContext(AuthContext)
-
 
   const showToast = (text) => {
     ToastAndroid.showWithGravity(
@@ -58,27 +55,10 @@ export default function LoginScreen() {
 
   async function handleSign(values) {
     const response = await signIn(values.email, values.password)
-    console.log(values.email, values.password);
     if (response == 404) {
       showToast('Email ou senha incorretos')
     }
-
     return response
-  }
-
-  function Login() {
-    const options = {
-      method: 'POST',
-      url: urls.login,
-      headers: { 'Content-Type': 'application/json' },
-      data: { email: email, password: pass }
-    };
-
-    axios.request(options).then(function (response) {
-      console.log(response.data);
-    }).catch(function (error) {
-      console.error(error);
-    });
   }
 
   return (
@@ -120,7 +100,7 @@ export default function LoginScreen() {
             <EnterArea>
               <RegularButton onPress={() => {
                 !values.email.length || !values.password.length ? showToast('Por favor preencha todos os campos') :
-                  !isValid ? showToast('Login inválido') : handleSign()
+                  !isValid ? showToast('Login inválido') : handleSubmit()
               }}>
                 <ButtonText>Entrar</ButtonText>
               </RegularButton>

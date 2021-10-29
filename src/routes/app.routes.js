@@ -11,35 +11,17 @@ import EditAnimalProfile from '../screens/EditAnimalProfile'
 const AppStack = createStackNavigator();
 
 const AppRoutes = () => (
-  <AppStack.Navigator screenOptions={{
-    headerStyle: {
-      backgroundColor: '#40444B',
-      borderBottomColor: '#40444B',
-    },
-    headerTintColor: '#fff',
-    cardStyle: { backgroundColor: "#363940" }
-  }}>
+  <AppStack.Navigator>
     <AppStack.Screen
       name="Home"
       component={Home}
       options={{
-        headerTitle: null,
+        headerTitle: 'Agriness',
         headerLeft: null,
         headerTitleAlign: 'center',
-        headerStyle: {
-          height: 80, // Especifica a altura do custom header
-          backgroundColor: '#40444B'
-        },
-        headerTitle: (props) => ( // App Logo
-          <Image
-            style={{ width: 50, height: 200, alignSelf: 'center' }}
-            source={icon}
-            resizeMode='contain'
-          />
-        )
       }}
     />
-    <AppStack.Screen name="Configurações"
+    <AppStack.Screen name="Perfil"
       options={{
         headerTitleAlign: 'center',
         headerTitleStyle: {
@@ -48,7 +30,7 @@ const AppRoutes = () => (
           fontFamily: 'Nunito'
         }
       }}
-      component={SettingsScreen} />
+      component={AnimalProfile} />
   </AppStack.Navigator>
 );
 

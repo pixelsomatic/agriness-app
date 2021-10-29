@@ -60,13 +60,12 @@ export const AuthProvider = ({ children }) => {
    */
   async function signIn(email, password) {
     const response = await auth.signIn(email, password)
-    console.log(response, '----');
-    if (response && response.response.status == 200) {
-      setUserData(response.data.user)
-      setToken(response.data.token)
+    if (response && response[0].refreshToken) {
+      setUserData(response[1].user)
+      setToken(response[0].refreshToken)
 
       const dataUser = [
-        ['@Agriness:token', response.data.token],
+        ['@Agriness:token', response[0].refreshToken],
         ['@Agriness:email', email],
         ['@Agriness:pass', password]
       ]
