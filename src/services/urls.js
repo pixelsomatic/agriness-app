@@ -1,4 +1,4 @@
-const baseUrl = 'https://3597-2804-4508-111f-d381-44f1-6282-8ffc-a19f.ngrok.io'
+const baseUrl = 'https://43d6-2804-4508-1118-47c1-d182-5968-2756-8b58.ngrok.io'
 
 export const urls = {
   login: baseUrl + 'api/login',
